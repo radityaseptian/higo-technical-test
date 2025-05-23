@@ -12,18 +12,14 @@ const errorCallback = (error: any) => {
 process.on('uncaughtException', errorCallback)
 process.on('unhandledRejection', errorCallback)
 
-connectDatabase()
-  .then(() => {
-    web.listen(port, async () => {
-      try {
-        console.info(`Running on Port: ${port}`)
-      } catch (error) {
-        console.error(error)
-        process.exit(1)
-      }
-    })
-  })
-  .catch((error) => {
-    console.error('Failed to connect DB:', error)
+const main = async () => {
+  try {
+    await connectDatabase()
+    web.listen(port, async () => console.info(`Running on Port: ${port}`))
+  } catch (error) {
+    console.error(error)
     process.exit(1)
-  })
+  }
+}
+
+main()
