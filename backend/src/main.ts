@@ -1,7 +1,8 @@
 import 'dotenv/config'
 
-const port = process.env.PORT as string
+const port = process.env.PORT as string || '4500'
 
+import http from 'http'
 import { web } from './application/web'
 import { connectDatabase } from './application/database'
 
@@ -14,12 +15,13 @@ process.on('unhandledRejection', errorCallback)
 
 const main = async () => {
   try {
-    await connectDatabase()
-    web.listen(port, async () => console.info(`Running on Port: ${port}`))
+    // await connectDatabase()
   } catch (error) {
     console.error(error)
     process.exit(1)
   }
 }
+const server = http.createServer(web)
+server.listen(port, () => console.log(`Server running on port ${port}`))
 
-main()
+// main()

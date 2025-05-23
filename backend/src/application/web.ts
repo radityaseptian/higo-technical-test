@@ -3,10 +3,13 @@ import morgan from 'morgan'
 import { errorMiddleware } from '../middleware/error-middleware'
 import cors from 'cors'
 import { publicRouter } from '../router/public-api'
+import { connectDatabase } from './database'
 
 export const web = express()
 
 web.use(morgan('dev'))
+
+connectDatabase()
 
 web.use(
   cors({
