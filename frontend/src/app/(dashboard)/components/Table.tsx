@@ -5,7 +5,7 @@ async function getInitialData() {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/summary?count=true&page=1&limit=10`)
 
   if (!response.ok) {
-    return []
+    return { data: [] }
   }
 
   return response.json()
