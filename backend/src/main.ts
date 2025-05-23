@@ -15,13 +15,13 @@ process.on('unhandledRejection', errorCallback)
 
 const main = async () => {
   try {
-    // await connectDatabase()
+    await connectDatabase()
+    const server = http.createServer(web)
+    server.listen(port, () => console.log(`Server running on port ${port}`))
   } catch (error) {
     console.error(error)
     process.exit(1)
   }
 }
-const server = http.createServer(web)
-server.listen(port, () => console.log(`Server running on port ${port}`))
 
-// main()
+main()

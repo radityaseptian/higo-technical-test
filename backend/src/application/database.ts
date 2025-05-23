@@ -8,8 +8,6 @@ const client = new MongoClient(mongodbUrl)
 let db: Db | null = null
 
 export async function connectDatabase() {
-  console.log(mongodbUrl)
-
   await client.connect()
   db = client.db(dbName)
 
